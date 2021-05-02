@@ -9,8 +9,9 @@ namespace dotNetCore5.WebApi.Infrastructure.Mappings
         public ControllerMappingProfile()
         {
             this.CreateMap<CustomersDto, CustomersViewModel>();
-            this.CreateMap<CustomersCreateDto, CustomersCreateViewModel>();
-            this.CreateMap<CustomersUpdateDto, CustomersUpdateViewModel>();
+
+            this.CreateMap<CustomersCreateViewModel, CustomersCreateDto>();
+            this.CreateMap<CustomersUpdateViewModel, CustomersUpdateDto>();
         }
     }
 }

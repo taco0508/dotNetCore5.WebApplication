@@ -46,7 +46,7 @@ namespace dotNetCore5.WebApi.Controllers
         public async Task<ActionResult<IEnumerable<CustomersViewModel>>> GetCustomerListAsync([FromBody] IEnumerable<string> customerIds)
         {
             var data = await this._customerService.GetCustomerListAsync(customerIds);
-            var result = this._mapper.Map<IEnumerable<CustomersDto>, IEnumerable<CustomersViewModel>>(data);
+            var result = this._mapper.Map<IEnumerable<CustomersViewModel>>(data);
 
             var o_result = result.OrderBy(x => x.Address);
 
@@ -61,7 +61,7 @@ namespace dotNetCore5.WebApi.Controllers
         [HttpPost]
         public async Task<ActionResult<int>> CreateCustomerAsync([FromBody] CustomersCreateViewModel customersCreateViewModel)
         {
-            var data = this._mapper.Map<CustomersCreateViewModel, CustomersCreateDto>(customersCreateViewModel);
+            var data = this._mapper.Map<CustomersCreateDto>(customersCreateViewModel);
             var result = await this._customerService.CreateCustomerAsync(data);
             return Ok(result);
         }
@@ -74,7 +74,7 @@ namespace dotNetCore5.WebApi.Controllers
         [HttpPut]
         public async Task<ActionResult<int>> UpdateCustomerAsync([FromBody] CustomersUpdateViewModel customersUpdateViewModel)
         {
-            var data = this._mapper.Map<CustomersUpdateViewModel, CustomersUpdateDto>(customersUpdateViewModel);
+            var data = this._mapper.Map<CustomersUpdateDto>(customersUpdateViewModel);
             var result = await this._customerService.UpdateCustomerAsync(data);
             return Ok(result);
         }

@@ -8,6 +8,7 @@ using dotNetCore5.DataAccess.Infrastructure.SqlHelper;
 using dotNetCore5.DataAccess.IRepositories;
 using dotNetCore5.DataAccess.Repositories;
 using dotNetCore5.WebApi.Infrastructure.Mappings;
+using dotNetCore5.WebApi.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -74,6 +75,9 @@ namespace dotNetCore5.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "dotNetCore5.WebApi v1"));
             }
+
+            //CustomExceptionHandlingMiddleware
+            app.UseCustomExceptionHandlingMiddleware();
 
             app.UseHttpsRedirection();
 

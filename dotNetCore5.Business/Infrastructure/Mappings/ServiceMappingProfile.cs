@@ -9,8 +9,9 @@ namespace dotNetCore5.Business.Infrastructure.Mappings
         public ServiceMappingProfile()
         {
             this.CreateMap<CustomersDbModel, CustomersDto>();
-            this.CreateMap<CustomersCreateDbModel, CustomersCreateDto>();
-            this.CreateMap<CustomersUpdateDbModel, CustomersUpdateDto>();
+
+            this.CreateMap<CustomersCreateDto, CustomersCreateDbModel>();
+            this.CreateMap<CustomersUpdateDto, CustomersUpdateDbModel>();
         }
     }
 }
