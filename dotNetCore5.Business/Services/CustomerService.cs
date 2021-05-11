@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using dotNetCore5.Business.Dtos;
@@ -28,6 +30,16 @@ namespace dotNetCore5.Business.Services
         /// <returns></returns>
         public async Task<IEnumerable<CustomersDto>> GetCustomerListAsync(IEnumerable<string> customerIds)
         {
+            if (customerIds is null)
+            {
+                throw new ArgumentNullException(nameof(customerIds));
+            }
+
+            if (!customerIds.Any()) 
+            {
+                throw new ArgumentException($"'{nameof(customerIds)}' 至少要有一筆資料", nameof(customerIds));
+            }
+
             var data = await this._customerRepository.GetCustomerListAsync(customerIds);
             var result = this._mapper.Map<IEnumerable<CustomersDbModel>, IEnumerable<CustomersDto>>(data);
             return result;
@@ -40,6 +52,11 @@ namespace dotNetCore5.Business.Services
         /// <returns></returns>
         public async Task<int> CreateCustomerAsync(CustomersCreateDto customersCreateDto)
         {
+            if (customersCreateDto is null)
+            {
+                throw new System.ArgumentNullException(nameof(customersCreateDto));
+            }
+
             var data = this._mapper.Map<CustomersCreateDto, CustomersCreateDbModel>(customersCreateDto);
             var result = await this._customerRepository.CreateCustomerAsync(data);
             return result;
@@ -52,6 +69,11 @@ namespace dotNetCore5.Business.Services
         /// <returns></returns>
         public async Task<int> UpdateCustomerAsync(CustomersUpdateDto customersUpdateDto)
         {
+            if (customersUpdateDto is null)
+            {
+                throw new ArgumentNullException(nameof(customersUpdateDto));
+            }
+
             var data = this._mapper.Map<CustomersUpdateDto, CustomersUpdateDbModel>(customersUpdateDto);
             var result = await this._customerRepository.UpdateCustomerAsync(data);
             return result;
@@ -64,6 +86,11 @@ namespace dotNetCore5.Business.Services
         /// <returns></returns>
         public async Task<int> DeleteCustomerAsync(string customerId)
         {
+            if (string.IsNullOrWhiteSpace(customerId))
+            {
+                throw new ArgumentException($"'{nameof(customerId)}' 不得為 Null 或空白字元。", nameof(customerId));
+            }
+
             var result = await this._customerRepository.DeleteCustomerAsync(customerId);
             return result;
         }
