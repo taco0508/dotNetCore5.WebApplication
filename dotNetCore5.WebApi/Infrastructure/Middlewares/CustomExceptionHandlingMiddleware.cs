@@ -52,17 +52,6 @@ namespace dotNetCore5.WebApi.Infrastructure.Middlewares
                 await response.WriteAsync(errorJson);
             }
         }
-
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
-        {
-            var response = context.Response;
-            response.ContentType = "application/json";
-            response.StatusCode = StatusCodes.Status500InternalServerError;
-
-            return response.WriteAsync(
-                $"{context.Response.StatusCode} Internal Server Error from the ExceptionHandle middleware."
-            );
-        }
     }
 
     public static class ExceptionHandleMiddlewareExtensions
