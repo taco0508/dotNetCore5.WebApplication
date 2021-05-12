@@ -47,10 +47,6 @@ namespace dotNetCore5.WebApi.Controllers
         {
             var data = await this._customerService.GetCustomerListAsync(customerIds);
             var result = this._mapper.Map<IEnumerable<CustomersViewModel>>(data);
-
-            List<CustomersViewModel> c = new List<CustomersViewModel>();
-            var a = c.First();
-
             return Ok(result);
         }
 
