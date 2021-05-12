@@ -120,7 +120,7 @@ namespace dotNetCore5.Business.Tests
             var sut = GetSystemUnderTest();
 
             // act
-            Action actual = async () => await sut.GetCustomerListAsync(customerIds);
+            Func<Task> actual = async () => await sut.GetCustomerListAsync(customerIds);
 
             // assert
             actual.Should().Throw<ArgumentNullException>()
